@@ -27,7 +27,7 @@
 				<groupId>org.apache.hadoop</groupId>
 				<artifactId>hadoop-hdfs</artifactId>
 				<version>${hadoop.version}</version>
-				<scope>runtime</scope>
+				<scope>provided</scope>
 			</dependency>
 			<dependency>
 				<groupId>org.apache.hadoop</groupId>
@@ -40,5 +40,6 @@
 	<packaging>pom</packaging>
 	<modules>
 		<module>hadoop-simple-word-count</module>
+		<module>hadoop-mapreduce-util</module>
 	</modules>
 </project>

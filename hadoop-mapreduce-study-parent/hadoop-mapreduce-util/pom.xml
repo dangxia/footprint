@@ -5,52 +5,30 @@
 		<groupId>com.github.dangxia</groupId>
 		<artifactId>hadoop-mapreduce-study-parent</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
+		<relativePath>../hadoop-mapreduce-study-parent</relativePath>
 	</parent>
-	<artifactId>hadoop-simple-word-count</artifactId>
+	<artifactId>hadoop-mapreduce-util</artifactId>
 
 	<dependencies>
 		<dependency>
 			<groupId>org.apache.hadoop</groupId>
 			<artifactId>hadoop-mapreduce-client-jobclient</artifactId>
+			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.hadoop</groupId>
 			<artifactId>hadoop-common</artifactId>
+			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.hadoop</groupId>
 			<artifactId>hadoop-hdfs</artifactId>
+			<scope>runtime</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.hadoop</groupId>
 			<artifactId>hadoop-mapreduce-client-app</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>com.github.dangxia</groupId>
-			<artifactId>hadoop-mapreduce-util</artifactId>
-			<version>${project.version}</version>
+			<scope>provided</scope>
 		</dependency>
 	</dependencies>
-
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-shade-plugin</artifactId>
-				<version>2.3</version>
-				<configuration>
-					<shadedGroupFilter>com.github.dangxia</shadedGroupFilter>
-					<dependencyReducedPomLocation>${basedir}/target/dependency-reduced-pom.xml</dependencyReducedPomLocation>
-				</configuration>
-				<executions>
-					<execution>
-						<phase>package</phase>
-						<goals>
-							<goal>shade</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-		</plugins>
-	</build>
 </project>

@@ -12,8 +12,11 @@ import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.apache.hadoop.mapreduce.lib.output.TextOutputFormat;
 import org.apache.hadoop.util.Tool;
 
+import com.github.dangxia.conf.WordCountConf;
+import com.github.dangxia.initor.WordCountInitor;
 import com.github.dangxia.mapper.WordCountMapper;
 import com.github.dangxia.reducer.WordCountReducer;
+import com.github.dangxia.tool.InitorToolRunner;
 
 public class SimpleWordCount extends Configured implements Tool {
 
@@ -40,9 +43,9 @@ public class SimpleWordCount extends Configured implements Tool {
 		job.setOutputKeyClass(Text.class);
 		job.setOutputValueClass(IntWritable.class);
 
-		FileInputFormat.addInputPaths(job, MyToolRunner.WORD_COUNT_INPUT_PATH);
+		FileInputFormat.addInputPaths(job, WordCountConf.WORD_COUNT_INPUT_PATH);
 		FileOutputFormat.setOutputPath(job, new Path(
-				MyToolRunner.WORD_COUNT_OUTPUT_PATH));
+				WordCountConf.WORD_COUNT_OUTPUT_PATH));
 
 		return job;
 	}
@@ -56,7 +59,8 @@ public class SimpleWordCount extends Configured implements Tool {
 	}
 
 	public static void main(String[] args) throws Exception {
-		int ret = MyToolRunner.run(new SimpleWordCount(), args);
+		int ret = new InitorToolRunner(new WordCountInitor()).run(
+				new SimpleWordCount(), args);
 		System.exit(ret);
 	}
 

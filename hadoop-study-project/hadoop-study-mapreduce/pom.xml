@@ -3,10 +3,11 @@
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>com.github.dangxia</groupId>
-		<artifactId>hadoop-mapreduce-study-parent</artifactId>
+		<artifactId>hadoop-study-project</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
+		<relativePath>../</relativePath>
 	</parent>
-	<artifactId>hadoop-simple-word-count</artifactId>
+	<artifactId>hadoop-study-mapreduce</artifactId>
 
 	<dependencies>
 		<dependency>
@@ -27,7 +28,7 @@
 		</dependency>
 		<dependency>
 			<groupId>com.github.dangxia</groupId>
-			<artifactId>hadoop-mapreduce-util</artifactId>
+			<artifactId>hadoop-study-util</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 	</dependencies>

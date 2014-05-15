@@ -8,7 +8,7 @@ import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Mapper;
 
-public class SimpleSortMapper extends
+public class SimpleCountSortMapper extends
 		Mapper<LongWritable, Text, IntWritable, Text> {
 	private IntWritable one = new IntWritable(1);
 	private Text word = new Text();

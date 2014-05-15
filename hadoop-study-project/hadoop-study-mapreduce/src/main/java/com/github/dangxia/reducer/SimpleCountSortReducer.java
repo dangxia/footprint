@@ -6,7 +6,7 @@ import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Reducer;
 
-public class SimpleSortReducer extends
+public class SimpleCountSortReducer extends
 		Reducer<IntWritable, Text, IntWritable, Text> {
 	private static IntWritable linenum = new IntWritable(1);
 

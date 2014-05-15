@@ -1,4 +1,4 @@
-package com.github.dangxia;
+package com.github.dangxia.chain;
 
 import java.util.List;
 import java.util.Map.Entry;
@@ -12,15 +12,17 @@ import org.apache.hadoop.mapreduce.lib.jobcontrol.JobControl;
 import org.apache.hadoop.util.Tool;
 import org.apache.hadoop.util.ToolRunner;
 
-public class SimpleChain extends Configured implements Tool {
+import com.github.dangxia.JobsFactory;
+
+public class SimpleCountSortChain extends Configured implements Tool {
 
 	private final JobControl jobControl;
 
-	public SimpleChain() {
-		this("simple-chain");
+	public SimpleCountSortChain() {
+		this("simple-count-sort-chain");
 	}
 
-	public SimpleChain(String jobname) {
+	public SimpleCountSortChain(String jobname) {
 		jobControl = new JobControl(jobname);
 	}
 
@@ -32,8 +34,8 @@ public class SimpleChain extends Configured implements Tool {
 	}
 
 	protected void fillJobControl() throws Exception {
-		Job wordCountJob = SimpleChainMapper.createJob(newConf());
-		Job sortJob = SimpleSort.createJob(newConf());
+		Job wordCountJob = JobsFactory.createSimpleWordCount(newConf());
+		Job sortJob = JobsFactory.createSimpleCountSort(newConf());
 
 		ControlledJob cWordCountJob = new ControlledJob(
 				wordCountJob.getConfiguration());
@@ -117,7 +119,7 @@ public class SimpleChain extends Configured implements Tool {
 	}
 
 	public static void main(String[] args) throws Exception {
-		System.exit(ToolRunner.run(new SimpleChain(), args));
+		System.exit(ToolRunner.run(new SimpleCountSortChain(), args));
 	}
 
 	public JobControl getJobControl() {

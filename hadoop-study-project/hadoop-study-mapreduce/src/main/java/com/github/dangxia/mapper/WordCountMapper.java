@@ -19,7 +19,7 @@ public class WordCountMapper extends
 		String line = value.toString();
 		StringTokenizer itr = new StringTokenizer(line);
 		while (itr.hasMoreTokens()) {
-			String str = itr.nextToken().replaceAll("[,.\"()!*/]", "");
+			String str = itr.nextToken().replaceAll("[,.\"()!*/']", "");
 			if (str.length() > 0) {
 				word.set(str);
 				context.write(word, one);

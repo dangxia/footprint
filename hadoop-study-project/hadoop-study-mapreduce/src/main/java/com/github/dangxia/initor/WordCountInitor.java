@@ -15,8 +15,8 @@ public class WordCountInitor extends Initor {
 
 	@Override
 	public void init() throws IOException {
-		FileSystem fs = FileSystem.get(getConf());
 
+		FileSystem fs = FileSystem.get(getConf());
 		if (fs.exists(WordCountConf.wordCountOutputPath)) {
 			fs.delete(WordCountConf.wordCountOutputPath, true);
 		}

@@ -12,6 +12,7 @@ public class JobsExecutor extends Configured implements Tool {
 	@Override
 	public int run(String[] args) throws Exception {
 		Job job = JobsFactory.createJob(args[0], getConf());
+		job.setNumReduceTasks(2);
 		return job.waitForCompletion(true) ? 0 : 1;
 	}
 
@@ -20,6 +21,7 @@ public class JobsExecutor extends Configured implements Tool {
 			useage();
 			return;
 		}
+		System.setProperty("HADOOP_USER_NAME", "root");
 		int ret = 0;
 		InitorToolRunner runner = new InitorToolRunner(new WordCountInitor());
 		if ("simple-count-sort-chain".equals(args[0])) {

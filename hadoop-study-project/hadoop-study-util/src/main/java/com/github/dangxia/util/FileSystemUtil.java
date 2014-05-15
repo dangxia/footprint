@@ -3,11 +3,26 @@ package com.github.dangxia.util;
 import java.io.IOException;
 import java.io.InputStream;
 
+import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.FSDataOutputStream;
 import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
 
 public class FileSystemUtil {
+
+	private static class FileSystemHold {
+		static FileSystem fs = null;
+		static {
+			System.setProperty("HADOOP_USER_NAME", "root");
+			Configuration conf = new Configuration();
+			try {
+				fs = FileSystem.get(conf);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
 	public static void copyFileInJarToHDFS(FileSystem fs, Path target,
 			boolean overwrite, String sourceInJar) throws IOException {
 		InputStream inputStream = null;
@@ -43,5 +58,9 @@ public class FileSystemUtil {
 
 			}
 		}
+	}
+
+	public static FileSystem getFileSystem() {
+		return FileSystemHold.fs;
 	}
 }

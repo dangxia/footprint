@@ -33,8 +33,28 @@ public class JobsFactory {
 			return createSimpleWordCountChainMapper(config);
 		} else if ("simple-count-sort".equals(name)) {
 			return createSimpleCountSort(config);
+		} else if ("simple-file-copy".equals(name)) {
+			return createSimpleFileCopy(config);
 		}
 		return null;
+	}
+
+	public static Job createSimpleFileCopy(Configuration config)
+			throws IOException {
+		Job job = Job.getInstance(config);
+		job.setJobName("simple-file-copy");
+		job.setJarByClass(JobsFactory.class);
+
+		job.setInputFormatClass(TextInputFormat.class);
+		job.setOutputFormatClass(TextOutputFormat.class);
+
+		job.setNumReduceTasks(0);
+
+		FileInputFormat.addInputPaths(job, WordCountConf.WORD_COUNT_INPUT_PATH);
+		FileOutputFormat.setOutputPath(job, new Path(
+				WordCountConf.WORD_COUNT_OUTPUT_PATH));
+
+		return job;
 	}
 
 	public static Job createSimpleWordCount(Configuration config)

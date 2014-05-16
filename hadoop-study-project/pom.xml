@@ -85,6 +85,7 @@
 								<configuration>
 									<outputDirectory>${project.build.directory}/dependency-jars/</outputDirectory>
 									<excludeScope>provided</excludeScope>
+									<excludeGroupIds>com.github.dangxia</excludeGroupIds>
 								</configuration>
 							</execution>
 						</executions>

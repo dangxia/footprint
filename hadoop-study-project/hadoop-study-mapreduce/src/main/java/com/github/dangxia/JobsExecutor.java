@@ -12,7 +12,6 @@ public class JobsExecutor extends Configured implements Tool {
 	@Override
 	public int run(String[] args) throws Exception {
 		Job job = JobsFactory.createJob(args[0], getConf());
-		job.setNumReduceTasks(2);
 		return job.waitForCompletion(true) ? 0 : 1;
 	}
 
@@ -39,5 +38,6 @@ public class JobsExecutor extends Configured implements Tool {
 		System.out.println("\tsimple-word-count");
 		System.out.println("\tsimple-word-count-chain-mapper");
 		System.out.println("\tsimple-count-sort");
+		System.out.println("\tsimple-file-copy");
 	}
 }

@@ -1,0 +1,26 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+  <artifactId>storm-study-serialization</artifactId>
+	<parent>
+		<groupId>com.github.dangxia</groupId>
+		<artifactId>storm-study-projects</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+	
+	<dependencies>
+		<!-- storm deps -->
+			<dependency>
+				<groupId>org.apache.storm</groupId>
+				<artifactId>storm-core</artifactId>
+			</dependency>
+			<!--/ storm deps -->
+
+			<!-- protobuf -->
+			<dependency>
+				<groupId>com.google.protobuf</groupId>
+				<artifactId>protobuf-java</artifactId>
+			</dependency>
+			<!-- /protobuf -->
+	</dependencies>
+</project>

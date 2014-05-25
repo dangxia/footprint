@@ -11,6 +11,7 @@ import backtype.storm.LocalCluster;
 import backtype.storm.StormSubmitter;
 import backtype.storm.generated.AlreadyAliveException;
 import backtype.storm.generated.InvalidTopologyException;
+import backtype.storm.serialization.DefaultKryoFactory;
 import backtype.storm.spout.SpoutOutputCollector;
 import backtype.storm.task.OutputCollector;
 import backtype.storm.task.TopologyContext;
@@ -22,7 +23,11 @@ import backtype.storm.tuple.Fields;
 import backtype.storm.tuple.Tuple;
 import backtype.storm.tuple.Values;
 
+import com.esotericsoftware.kryo.Kryo;
+import com.esotericsoftware.kryo.Registration;
+import com.esotericsoftware.kryo.Serializer;
 import com.github.dangxia.proto.PersonPB.Person;
+import com.google.protobuf.GeneratedMessage;
 
 public class ProtoBuffSerializerToplogy {
 	public static class ProtoBuffSerializerSpout extends BaseRichSpout {
@@ -101,10 +106,11 @@ public class ProtoBuffSerializerToplogy {
 	public static void main(String[] args) throws AlreadyAliveException,
 			InvalidTopologyException, InterruptedException {
 		Config conf = new Config();
-		conf.registerSerialization(Person.class, ProtoBuffSerializer.class);
+		// conf.registerSerialization(Person.class, ProtoBuffSerializer.class);
 		conf.setMaxSpoutPending(5);
-		conf.setMaxTaskParallelism(2);
-		conf.setNumWorkers(3);
+		conf.setMaxTaskParallelism(1);
+		conf.setNumWorkers(2);
+		conf.setKryoFactory(MyKryoFactory.class);
 
 		TopologyBuilder builder = new TopologyBuilder();
 		builder.setSpout("test-s-spout", new ProtoBuffSerializerSpout(), 1);
@@ -122,6 +128,35 @@ public class ProtoBuffSerializerToplogy {
 			StormSubmitter.submitTopology("test-s", conf,
 					builder.createTopology());
 		}
+	}
 
+	public static class MyKryoFactory extends DefaultKryoFactory {
+
+		public static class KryoSerializableDefault2 extends
+				KryoSerializableDefault {
+			private final Serializer serializer;
+
+			public KryoSerializableDefault2() {
+				serializer = new ProtoBuffSerializer<GeneratedMessage>();
+			}
+
+			@Override
+			public Serializer getDefaultSerializer(Class type) {
+				if (GeneratedMessage.class.isAssignableFrom(type)) {
+					return serializer;
+				}
+				return super.getDefaultSerializer(type);
+			}
+
+		}
+
+		@Override
+		public Kryo getKryo(Map conf) {
+			KryoSerializableDefault2 k = new KryoSerializableDefault2();
+			k.setRegistrationRequired(!((Boolean) conf
+					.get(Config.TOPOLOGY_FALL_BACK_ON_JAVA_SERIALIZATION)));
+			k.setReferences(false);
+			return k;
+		}
 	}
 }

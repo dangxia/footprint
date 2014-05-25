@@ -16,7 +16,6 @@ public class ProtoBuffSerializer<T extends GeneratedMessage> extends
 	@Override
 	public void write(Kryo kryo, Output output, T object) {
 		try {
-			System.out.println("------------------------write---------------");
 			object.writeTo(output);
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -27,7 +26,6 @@ public class ProtoBuffSerializer<T extends GeneratedMessage> extends
 	@Override
 	public T read(Kryo kryo, Input input, Class<T> type) {
 		try {
-			System.out.println("------------------------read---------------");
 			return (T) type.getMethod("parseFrom", InputStream.class).invoke(
 					null, input);
 		} catch (IllegalAccessException e) {

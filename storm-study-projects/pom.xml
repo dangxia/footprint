@@ -151,4 +151,8 @@
 			</build>
 		</profile>
 	</profiles>
+	<modules>
+		<module>storm-study-serialization</module>
+		<module>storm-study-util</module>
+	</modules>
 </project>

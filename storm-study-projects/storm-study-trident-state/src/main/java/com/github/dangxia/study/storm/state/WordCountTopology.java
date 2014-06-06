@@ -53,7 +53,7 @@ public class WordCountTopology {
 				.persistentAggregate(
 						new WordCountStateFactory(TimeUnit.SECONDS, 1),
 						new Count(), new Fields("count"));
-		state.newValuesStream().each(new Fields("word", "count"), printer);
+		// state.newValuesStream().each(new Fields("word", "count"), printer);
 
 		// topology.newStream("kkkk2", spout).stateQuery(state, function,
 		// functionFields)
@@ -69,46 +69,25 @@ public class WordCountTopology {
 				.project(new Fields("word", "count"));
 
 		cluster.submitTopology("kkkkkk", config, topology.build());
-
-		new Thread() {
-			public void run() {
-				while (true) {
-					System.out.println("query one:"
-							+ drpc.execute("query", "one"));
-					System.out.println("query two:"
-							+ drpc.execute("query", "two"));
-					System.out.println("query three:"
-							+ drpc.execute("query", "three"));
-					System.out.println("query all:"
-							+ drpc.execute("query", "one two three four"));
-					try {
-						TimeUnit.MILLISECONDS.sleep(500);
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
-				}
-			};
-		}.start();
-
-		new Thread() {
-			public void run() {
-				while (true) {
-					System.out.println("query one:"
-							+ drpc.execute("query", "one"));
-					System.out.println("query two:"
-							+ drpc.execute("query", "two"));
-					System.out.println("query three:"
-							+ drpc.execute("query", "three"));
-					System.out.println("query all:"
-							+ drpc.execute("query", "one two three four"));
-					try {
-						TimeUnit.MILLISECONDS.sleep(500);
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
-				}
-			};
-		}.start();
+		/*
+		 * new Thread() { public void run() { while (true) {
+		 * System.out.println("query one:" + drpc.execute("query", "one"));
+		 * System.out.println("query two:" + drpc.execute("query", "two"));
+		 * System.out.println("query three:" + drpc.execute("query", "three"));
+		 * System.out.println("query all:" + drpc.execute("query",
+		 * "one two three four")); try { TimeUnit.MILLISECONDS.sleep(500); }
+		 * catch (InterruptedException e) { e.printStackTrace(); } } };
+		 * }.start();
+		 * 
+		 * new Thread() { public void run() { while (true) {
+		 * System.out.println("query one:" + drpc.execute("query", "one"));
+		 * System.out.println("query two:" + drpc.execute("query", "two"));
+		 * System.out.println("query three:" + drpc.execute("query", "three"));
+		 * System.out.println("query all:" + drpc.execute("query",
+		 * "one two three four")); try { TimeUnit.MILLISECONDS.sleep(500); }
+		 * catch (InterruptedException e) { e.printStackTrace(); } } };
+		 * }.start();
+		 */
 
 	}
 

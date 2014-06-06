@@ -66,6 +66,7 @@ public class WordCountStateFactory implements StateFactory {
 		@Override
 		public List<Long> multiUpdate(List<List<Object>> keys,
 				@SuppressWarnings("rawtypes") List<ValueUpdater> updaters) {
+			log.info("running multiUpdate");
 			before();
 			List<Long> list = super.multiUpdate(keys, updaters);
 			after();
@@ -74,6 +75,7 @@ public class WordCountStateFactory implements StateFactory {
 
 		@Override
 		public void multiPut(List<List<Object>> keys, List<Long> vals) {
+			log.info("running multiPut");
 			before();
 			super.multiPut(keys, vals);
 			after();
@@ -81,6 +83,7 @@ public class WordCountStateFactory implements StateFactory {
 
 		@Override
 		public List<Long> multiGet(List<List<Object>> keys) {
+			log.info("running multiGet");
 			before();
 			List<Long> list = super.multiGet(keys);
 			after();

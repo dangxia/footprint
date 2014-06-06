@@ -239,5 +239,7 @@
 		<module>storm-study-util</module>
 		<module>storm-study-max-pending</module>
 		<module>storm-study-trident-state</module>
+		<module>storm-study-opaque</module>
+		<module>storm-study-stream-merge</module>
 	</modules>
 </project>

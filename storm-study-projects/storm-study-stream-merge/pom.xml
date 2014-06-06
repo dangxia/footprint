@@ -6,7 +6,7 @@
 		<artifactId>storm-study-projects</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-	<artifactId>storm-study-util</artifactId>
+	<artifactId>storm-study-stream-merge</artifactId>
 
 	<dependencies>
 		<!-- storm deps -->
@@ -15,6 +15,10 @@
 			<artifactId>storm-core</artifactId>
 		</dependency>
 		<!--/ storm deps -->
-
+		<dependency>
+			<groupId>com.github.dangxia</groupId>
+			<artifactId>storm-study-util</artifactId>
+			<version>${project.version}</version>
+		</dependency>
 	</dependencies>
 </project>

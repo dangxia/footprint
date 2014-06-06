@@ -6,15 +6,21 @@
 		<artifactId>storm-study-projects</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-	<artifactId>storm-study-util</artifactId>
+	<artifactId>storm-study-opaque</artifactId>
 
 	<dependencies>
+
 		<!-- storm deps -->
 		<dependency>
 			<groupId>org.apache.storm</groupId>
 			<artifactId>storm-core</artifactId>
+			<scope>provided</scope>
 		</dependency>
 		<!--/ storm deps -->
-
+		<dependency>
+			<groupId>com.github.dangxia</groupId>
+			<artifactId>storm-study-util</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
 	</dependencies>
 </project>

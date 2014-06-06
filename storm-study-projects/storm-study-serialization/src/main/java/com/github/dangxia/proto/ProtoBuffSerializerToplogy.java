@@ -24,7 +24,6 @@ import backtype.storm.tuple.Tuple;
 import backtype.storm.tuple.Values;
 
 import com.esotericsoftware.kryo.Kryo;
-import com.esotericsoftware.kryo.Registration;
 import com.esotericsoftware.kryo.Serializer;
 import com.github.dangxia.proto.PersonPB.Person;
 import com.google.protobuf.GeneratedMessage;

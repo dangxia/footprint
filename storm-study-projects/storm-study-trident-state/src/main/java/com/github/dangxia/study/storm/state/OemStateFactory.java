@@ -25,7 +25,7 @@ public class OemStateFactory implements StateFactory {
 	}
 
 	@Override
-	public State makeState(Map conf, IMetricsContext metrics,
+	public State makeState(@SuppressWarnings("rawtypes") Map conf, IMetricsContext metrics,
 			int partitionIndex, int numPartitions) {
 		MemoryMapState<String> state = new MemoryMapState<String>(_id
 				+ partitionIndex);

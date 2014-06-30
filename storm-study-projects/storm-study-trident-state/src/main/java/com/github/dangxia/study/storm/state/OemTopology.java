@@ -122,14 +122,15 @@ public class OemTopology {
 
 	}
 
-	public static void main2(String[] args) {
+	public static void main(String[] args) {
 		Config config = new Config();
 		config.setNumWorkers(1);
 		// config.setDebug(true);
-		config.setMaxTaskParallelism(1);
+		// config.setMaxTaskParallelism(1);
 
 		TridentTopology topology = new TridentTopology();
-		TridentState oemState = topology.newStaticState(new OemStateFactory());
+		TridentState oemState = topology.newStaticState(new OemStateFactory())
+				.parallelismHint(4);
 		topology.newStream("spout1", new OemSpout())
 				.stateQuery(oemState, new Fields("oemid"),
 						new OemQueryFunction(), new Fields("spid"))
@@ -174,7 +175,7 @@ public class OemTopology {
 
 	}
 
-	public static void main(String[] args) {
+	public static void main20(String[] args) {
 		Config config = new Config();
 		config.setNumWorkers(1);
 		// config.setDebug(true);
